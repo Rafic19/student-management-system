@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>View Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="table-container"></div>
+
+    <h1>All Students</h1>
+    <form method="GET" action="/view-students">
+
+    <input type="text" name="search" placeholder="Search student">
+
+    <button type="submit">Search</button>
+
+</form>
+    <table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Course</th>
+        <th>Action</th>
+    </tr>
+
+    {% for student in students %}
+
+    <tr>
+        <td>{{ student[0] }}</td>
+        <td>{{ student[1] }}</td>
+        <td>{{ student[2] }}</td>
+        <td>{{ student[3] }}</td>
+        <td>{{ student[4] }}</td>
+    
+        <td>
+    <a href="/edit-student/{{ student[0] }}">
+    <button class="edit-btn">Edit</button>
+    
+</a>
+   <a href="/delete-student/{{ student[0] }}"
+   onclick="return confirm('Are you sure you want to delete this student?')">
+    <button class="delete-btn">Delete</button>
+</a>
+    </td>
+        
+    </tr>
+
+    {% endfor %}
+
+</table>
+ </div>
+ <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
